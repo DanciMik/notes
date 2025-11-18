@@ -1,0 +1,597 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        body {
+            color: #fff;
+            height: 100vh;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            background: #000;
+            border: 1px solid #333;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: #000;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            min-height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .logo i {
+            font-size: 1.4rem;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            min-height: 40px;
+        }
+
+        .btn:hover, .btn:active {
+            background: #1a1a1a;
+            border-color: #666;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background: #0a0a0a;
+            border-right: 1px solid #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            overflow-y: auto;
+        }
+
+        .sidebar-section h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subject-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .subject-item {
+            padding: 12px 15px;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 44px;
+            color: #ccc;
+        }
+
+        .subject-item:hover, .subject-item:active {
+            background: #1a1a1a;
+            border-color: #666;
+        }
+
+        .subject-item.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .add-subject-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .add-subject-btn:hover {
+            background: #1a1a1a;
+            border-color: #666;
+        }
+
+        .month-filter {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .month-filter select {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #000;
+            color: #fff;
+            font-size: 0.9rem;
+            min-height: 40px;
+        }
+
+        /* Notebook Area */
+        .notebook-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .notebook-header {
+            padding: 15px 20px;
+            background: #000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 70px;
+        }
+
+        .notebook-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tool-btn {
+            background: transparent;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 10px 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            min-height: 40px;
+            min-width: 40px;
+            color: #fff;
+        }
+
+        .tool-btn:hover, .tool-btn:active {
+            background: #1a1a1a;
+            border-color: #666;
+        }
+
+        .tool-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Drawing Tools */
+        .drawing-tools {
+            display: flex;
+            gap: 6px;
+            padding: 10px 20px;
+            background: #000;
+            border-bottom: 1px solid #333;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .pen-tool {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: #fff;
+            background: transparent;
+        }
+
+        .pen-tool.active {
+            border-color: #fff;
+            background: #fff;
+            color: #000;
+        }
+
+        .color-picker {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-picker.active {
+            border-color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Notebook Paper */
+        .notebook-paper {
+            flex: 1;
+            background: #000;
+            margin: 15px;
+            border-radius: 0;
+            border: 1px solid #333;
+            padding: 25px;
+            overflow: hidden;
+            position: relative;
+            background-image: 
+                linear-gradient(#1a1a1a 1px, transparent 1px),
+                linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 0;
+            touch-action: none;
+        }
+
+        #drawing-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        .note-content {
+            min-height: 100%;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #fff;
+            white-space: pre-wrap;
+            outline: none;
+            padding: 10px;
+            position: relative;
+            z-index: 2;
+            user-select: text;
+            -webkit-user-select: text;
+            background: transparent;
+            border: none;
+        }
+
+        .writing-mode .note-content {
+            pointer-events: none;
+        }
+
+        .note-date {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #666;
+            font-weight: 400;
+            background: #000;
+            padding: 6px 10px;
+            border-radius: 4px;
+            z-index: 3;
+            font-size: 0.8rem;
+            border: 1px solid #333;
+        }
+
+        /* Notes List */
+        .notes-list {
+            width: 260px;
+            background: #0a0a0a;
+            border-left: 1px solid #333;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+
+        .notes-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .note-card {
+            background: transparent;
+            border-radius: 6px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #333;
+            min-height: 70px;
+            color: #ccc;
+        }
+
+        .note-card:hover, .note-card:active {
+            background: #1a1a1a;
+            border-color: #666;
+        }
+
+        .note-card.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .note-card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .note-subject {
+            font-weight: 500;
+            color: inherit;
+            font-size: 0.8rem;
+        }
+
+        .note-card-date {
+            font-size: 0.7rem;
+            color: inherit;
+            opacity: 0.7;
+        }
+
+        .note-preview {
+            font-size: 0.8rem;
+            color: inherit;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            opacity: 0.9;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #000;
+            border-radius: 8px;
+            padding: 25px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid #333;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #000;
+            color: #fff;
+            font-size: 0.9rem;
+            min-height: 44px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            border: 1px solid #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            min-height: 44px;
+            min-width: 80px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            background: #ccc;
+            border-color: #ccc;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            min-height: 44px;
+            min-width: 80px;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover, .btn-secondary:active {
+            background: #1a1a1a;
+            border-color: #666;
+        }
+
+        /* Status Messages */
+        .status-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            color: #000;
+            padding: 12px 18px;
+            border-radius: 6px;
+            z-index: 1001;
+            display: none;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .stats {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .stats span {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+            
+            .notes-list {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .notebook-paper {
+                margin: 10px;
+                padding: 20px;
+            }
+        }

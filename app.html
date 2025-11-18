@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Čiernobiely Denník</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+    <div class="status-message" id="status-message"></div>
+
+    <div class="app-container">
+
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-book"></i>
+                <span>Denník</span>
+            </div>
+            <div class="user-actions">
+                <button class="btn" id="export-btn">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+    
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-grid"></i> Predmety</h3>
+                    <ul class="subject-list" id="subject-list">
+                        <li class="subject-item active" data-subject="all">
+                            <i class="fas fa-star"></i> Všetky
+                        </li>
+                    </ul>
+                    <button class="add-subject-btn" id="add-subject-btn">
+                        <i class="fas fa-plus"></i> Nový predmet
+                    </button>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-filter"></i> Mesiac</h3>
+                    <div class="month-filter">
+                        <select id="month-filter">
+                            <option value="all">Všetky</option>
+                            <option value="0">Január</option>
+                            <option value="1">Február</option>
+                            <option value="2">Marec</option>
+                            <option value="3">Apríl</option>
+                            <option value="4">Máj</option>
+                            <option value="5">Jún</option>
+                            <option value="6">Júl</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">Október</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-chart-simple"></i> Štatistiky</h3>
+                    <div class="stats">
+                        <p>Poznámky: <span id="total-notes">0</span></p>
+                        <p>Predmet: <span id="active-subject">Všetky</span></p>
+                        <p>Aktuálna: <span id="current-note-title">Žiadna</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notebook-area">
+                <div class="notebook-header">
+                    <div class="notebook-title" id="current-notebook-title">Môj denník</div>
+                    <div class="toolbar">
+                        <button class="tool-btn" id="text-mode-btn">
+                            <i class="fas fa-font"></i> Text
+                        </button>
+                        <button class="tool-btn" id="draw-mode-btn">
+                            <i class="fas fa-pen"></i> Pero
+                        </button>
+                        <button class="tool-btn" id="save-btn">
+                            <i class="fas fa-save"></i> Uložiť
+                        </button>
+                        <button class="tool-btn" id="delete-btn">
+                            <i class="fas fa-trash"></i> Vymazať
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="drawing-tools" id="drawing-tools" style="display: none;">
+                    <div class="pen-tool active" data-size="2">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <div class="pen-tool" data-size="4">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <div class="pen-tool" data-size="8">
+                        <i class="fas fa-brush"></i>
+                    </div>
+                    <div class="color-picker active" style="background: #ffffff;" data-color="#ffffff"></div>
+                    <div class="color-picker" style="background: #cccccc;" data-color="#cccccc"></div>
+                    <div class="color-picker" style="background: #666666;" data-color="#666666"></div>
+                    <button class="tool-btn" id="clear-drawing-btn">
+                        <i class="fas fa-eraser"></i> Vymazať
+                    </button>
+                </div>
+
+                <div class="notebook-paper" id="notebook-paper">
+                    <div class="note-date" id="current-date">15. október 2023</div>
+                    <canvas id="drawing-canvas"></canvas>
+                    <div class="note-content" id="note-editor" contenteditable="true">
+                        Vitajte v denníku.
+                        
+                        Pre textový zápis použite režim "Text".
+                        Pre písanie perom prepnite na "Pero".
+                    </div>
+                </div>
+            </div>
+
+            <div class="notes-list">
+                <div class="notes-header">
+                    <div class="notes-title">Poznámky</div>
+                    <button class="btn" id="new-note-btn">
+                        <i class="fas fa-plus"></i> Nová
+                    </button>
+                </div>
+                <div id="notes-container">
+                    <div class="empty-state">Žiadne poznámky</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="new-note-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Nová poznámka</div>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="note-subject">Predmet</label>
+                <select id="note-subject"></select>
+            </div>
+            <div class="form-group">
+                <label for="note-title">Názov</label>
+                <input type="text" id="note-title" placeholder="Názov poznámky">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancel-note">Zrušiť</button>
+                <button class="btn-primary" id="create-note">Vytvoriť</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="add-subject-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Nový predmet</div>
+                <button class="close-modal" id="close-subject-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="new-subject-name">Názov predmetu</label>
+                <input type="text" id="new-subject-name" placeholder="Zadajte názov">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancel-subject">Zrušiť</button>
+                <button class="btn-primary" id="create-subject">Pridať</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
